@@ -4,7 +4,7 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 
-all: setup test build
+all: clean setup build
 setup:
 	$(GOGET) github.com/bitly/go-simplejson
 build:
