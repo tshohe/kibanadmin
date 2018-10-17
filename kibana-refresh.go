@@ -55,7 +55,7 @@ func main() {
 		fmt.Println("Title: " + p.Title + ", Id: " + p.Id)
 	}
 
-	if check == true {
+	if check {
 		os.Exit(0)
 	}
 
@@ -82,7 +82,15 @@ func main() {
 func getAllIndexPattern(indexPattern string) (patterns []Pattern, err error) {
 	url := url + "/api/saved_objects/_find?type=index-pattern&fields=title&per_page=10000"
 	result, err := doGet(url)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
 	jsonData, err := simplejson.NewJson(result)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
 	savedObjects := jsonData.Get("saved_objects").MustArray()
 	r := regexp.MustCompile(indexPattern)
 	for _, value := range savedObjects {
