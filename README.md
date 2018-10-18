@@ -28,7 +28,7 @@ $ bin/kibana-refresh -i [regexp expression index-pattern] -v [kibana version]
 If there is basic authentication
 
 ```
-$ bin/kibanadmin -i [regexp expression index-pattern] -v [kibana version] -u [username] -p [password]
+$ bin/kibanadmin -i [regexp expression index-pattern] -v [kibana version] -u [username]
 ```
 
 ## License
