@@ -10,8 +10,10 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"syscall"
 
 	simplejson "github.com/bitly/go-simplejson"
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 type Pattern struct {
@@ -31,8 +33,7 @@ var (
 
 func init() {
 	flag.StringVar(&url, "uri", "http://localhost:5601", "Url to access Kibana. e.g. http://localhost:5601")
-	flag.StringVar(&username, "u", "", "Username (if necessary)")
-	flag.StringVar(&password, "p", "", "Password (if necessary)")
+	flag.StringVar(&username, "u", "", "Username (if authentication is required)")
 	flag.StringVar(&version, "v", "6.4.0", "Kibana version")
 	flag.StringVar(&indexPattern, "i", "", "Specify index pattern as regular expression")
 	flag.BoolVar(&check, "c", false, "Whether to check the index-pattern matching the regular expression")
@@ -42,6 +43,15 @@ func main() {
 	flag.Parse()
 	if indexPattern == "" {
 		log.Fatal("indexPattern is not defined.")
+	}
+	if username != "" {
+		fmt.Print("Password: ")
+		bytePassword, err := terminal.ReadPassword(int(syscall.Stdin))
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Print("\n")
+		password = string(bytePassword)
 	}
 
 	// get infomation of index-pattern
@@ -128,7 +138,6 @@ func setSchema(pattern Pattern) (result []byte, err error) {
 		log.Fatal(err)
 		return
 	}
-	// os.Exit(0)
 	queryJsonData := simplejson.New()
 	queryJsonData.SetPath([]string{"attributes", "title"}, pattern.Title)
 	queryJsonData.SetPath([]string{"attributes", "fields"}, string(jsonFields))
