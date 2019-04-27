@@ -1,14 +1,11 @@
+.PHONY: build clean
+
 GOCMD=go
 GOBUILD=$(GOCMD) build
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 
-all: clean setup build
-
-setup:
-	$(GOGET) github.com/bitly/go-simplejson
-
-build:
+build: clean
 	export GO111MODULE=on
 	$(GOBUILD) -o bin/kibana-refresh cmd/kibana-refresh/main.go
 
