@@ -10,7 +10,7 @@ $ make
 
 ## Refresh .kibana index-pattern
 
-This command refresh targets index-patterns fields definition.  
+This command refresh targets index-patterns fields definition.
 You should reload page after execution.
 
 Check targets index-patterns before execute
