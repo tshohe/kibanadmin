@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/bitly/go-simplejson v0.5.1
-	golang.org/x/crypto v0.16.0
+	golang.org/x/crypto v0.17.0
 )
 
 require (
