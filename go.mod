@@ -6,7 +6,7 @@ toolchain go1.24.4
 
 require (
 	github.com/bitly/go-simplejson v0.5.1
-	golang.org/x/crypto v0.38.0
+	golang.org/x/crypto v0.39.0
 )
 
 require (
