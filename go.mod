@@ -2,7 +2,7 @@ module github.com/tshohe/kibanadmin
 
 go 1.23.0
 
-toolchain go1.24.4
+toolchain go1.25.1
 
 require (
 	github.com/bitly/go-simplejson v0.5.1
